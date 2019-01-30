@@ -13,8 +13,13 @@ from utils import read_data
 from utils import build_dataset
 from utils import get_train_data
 
-from flags import parse_args
-FLAGS, unparsed = parse_args()
+# 本地linux环境运行时获取参数的方法
+#from flags import parse_args
+#FLAGS, unparsed = parse_args()
+
+# tinymind运行时获取参数的方法
+from tinyenv import flags
+FLAGS = flags.init()
 
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
