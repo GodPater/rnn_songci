@@ -31,6 +31,8 @@ def get_train_data(vocabulary, batch_size, num_steps):
     ##################
     # Your Code here
     ##################
+    len_batch = len(vocabulary)//batch_size
+    epoch_size=len(vocabulary)//batch_size//num_steps
     # 所有batch的训练和标签数组
     x_batches = np.zeros([batch_size, len_batch], dtype=np.int32)
     y_batches = np.zeros([batch_size, len_batch], dtype=np.int32)
