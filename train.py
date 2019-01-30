@@ -13,28 +13,8 @@ from utils import read_data
 from utils import build_dataset
 from utils import get_train_data
 
-import argparse
-
-def parse_args(check=True):
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--text', type=str)
-    parser.add_argument('--output_dir', type=str)
-    parser.add_argument('--dictionary', type=str)
-    parser.add_argument('--reverse_dictionary', type=str)
-    parser.add_argument('--batch_size', type=int, default=16)
-    parser.add_argument('--num_steps', type=int, default=32)
-    parser.add_argument('--learning_rate', type=float, default=1e-4)
-
-    FLAGS, unparsed = parser.parse_known_args()
-    return FLAGS, unparsed
-
-# 本地linux环境运行时获取参数的方法
-#from flags import parse_args
+from flags import parse_args
 FLAGS, unparsed = parse_args()
-
-# tinymind运行时获取参数的方法：无init方法
-# from tinyenv import flags
-# FLAGS = flags.init()
 
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
