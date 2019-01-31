@@ -31,17 +31,19 @@ def get_train_data(vocabulary, batch_size, num_steps):
     ##################
     # Your Code here
     ##################
-    len_batch = len(vocabulary)//batch_size
-    epoch_size=len(vocabulary)//batch_size//num_steps
-    # 所有batch的训练和标签数组
-    x_batches = np.zeros([batch_size, len_batch], dtype=np.int32)
-    y_batches = np.zeros([batch_size, len_batch], dtype=np.int32)
-    
+    raw_data = vocabulary
+    data_len = len(raw_data)
+    batch_len = data_len // batch_size
+    data = [[0]*batch_len]*batch_size
+    for i in range(batch_size):
+        data[i] = raw_data[batch_len * i:batch_len * (i + 1)]
+    epoch_size = (batch_len - 1) // num_steps
+    data = np.array(data)
+    print('{} steps in every epoch '.format(epoch_size))
     for i in range(epoch_size):
-        x = x_batches[:, num_steps*i : num_steps*(i+1)]
-        y = y_batches[:, num_steps*i : num_steps*(i+1)]
-        yield(x, y)
-
+        x = data[:, i*num_steps: (i+1)*num_steps]
+        y = data[:, i*num_steps+1: (i+1)*num_steps+1]
+        yield (x, y)
 
 def build_dataset(words, n_words):
     """Process raw inputs into a dataset."""
