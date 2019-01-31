@@ -30,6 +30,10 @@ with open(FLAGS.dictionary, encoding='utf-8') as inf:
 with open(FLAGS.reverse_dictionary, encoding='utf-8') as inf:
     reverse_dictionary = json.load(inf, encoding='utf-8')
 
+print('FLAGS.learning_rate=', FLAGS.learning_rate)
+print('FLAGS.batch_size=', FLAGS.batch_size)
+print('FLAGS.num_steps=', FLAGS.num_steps)
+print('FLAGS.embedding=', FLAGS.embedding)
 
 model = Model(learning_rate=FLAGS.learning_rate, batch_size=FLAGS.batch_size, num_steps=FLAGS.num_steps)
 model.build(FLAGS.embedding)
