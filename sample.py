@@ -7,6 +7,8 @@ import logging
 import numpy as np
 import tensorflow as tf
 
+tf.reset_default_graph()
+
 import utils
 from model import Model
 
