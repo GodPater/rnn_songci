@@ -32,8 +32,8 @@ def parse_args(check=True):
 
     parser.add_argument('--learning_rate', type=float, default=0.001,
                         help='learning rate')
-    
-    parser.add_argument('--embedding', type=str, default='/data/Chase24/chase-rnn-songci2/embedding.npy',
+	
+    parser.add_argument('--embedding', type=str, default='embedding.npy',
                         help='path to embedding.npy.')
 
     FLAGS, unparsed = parser.parse_known_args()
