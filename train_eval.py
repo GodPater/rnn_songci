@@ -32,4 +32,3 @@ if __name__ == '__main__':
         p = os.popen('python ./sample.py' + cmd)
         for l in p:
             print(l.strip())
-
