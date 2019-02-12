@@ -7,8 +7,6 @@ import logging
 import numpy as np
 import tensorflow as tf
 
-tf.reset_default_graph()
-
 import utils
 from model import Model
 
@@ -32,7 +30,7 @@ titles = ['江神子', '蝶恋花', '渔家傲']
 
 
 model = Model(learning_rate=FLAGS.learning_rate, batch_size=1, num_steps=1)
-model.build()
+model.build(FLAGS.embedding)
 
 with tf.Session() as sess:
     summary_string_writer = tf.summary.FileWriter(FLAGS.output_dir, sess.graph)
@@ -52,13 +50,13 @@ with tf.Session() as sess:
         exit(0)
 
     for title in titles:
-        state = sess.run(model.init_state)
+        state = sess.run(model.state_tensor)
         # feed title
         for head in title:
             input = utils.index_data(np.array([[head]]), dictionary)
 
             feed_dict = {model.X: input,
-                         model.init_state: state,
+                         model.state_tensor: state,
                          model.keep_prob: 1.0}
 
             pred, state = sess.run(
@@ -70,7 +68,7 @@ with tf.Session() as sess:
         # generate sample
         for i in range(64):
             feed_dict = {model.X: [[word_index]],
-                         model.init_state: state,
+                         model.state_tensor: state,
                          model.keep_prob: 1.0}
 
             pred, state = sess.run(
